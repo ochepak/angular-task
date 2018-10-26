@@ -1,0 +1,20 @@
+<div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let user of activeItems; let i = index;">
+      <span>{{ i + 1 + (currentPage - 1) * pageSize }}.</span>
+      <a (click)="createComponent(user)" data-toggle="modal" data-target="#userModal" href="#">{{ user.login }}</a>
+    </li>
+  </ul>
+  <template #modalContainer></template>
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{disabled:currentPage === 1}">
+      <a href="#" class="page-link" (click)="setPage(currentPage-1)">Prev</a>
+    </li>
+    <li class="page-item" [ngClass]="{active:currentPage === i+1}" *ngFor="let page of pages; let i = index;">
+      <a href="#" class="page-link" (click)="setPage(i+1)">{{ i+1 }}</a>
+    </li>
+    <li class="page-item" [ngClass]="{disabled:currentPage === pages.length}">
+      <a href="#" class="page-link" (click)="setPage(currentPage+1)">Next</a>
+    </li>
+  </ul>
+</div>

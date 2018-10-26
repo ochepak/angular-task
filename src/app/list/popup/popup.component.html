@@ -1,0 +1,15 @@
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="{{user.avatar_url}}" alt="{{ user.login }}" class="img-thumbnail">
+        <p><strong>User id:</strong> {{ user.id }}</p>
+        <p><strong>Login:</strong> {{ user.login }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="{{ user.html_url }}" target="_blank">Find {{ user.login }} on github</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
