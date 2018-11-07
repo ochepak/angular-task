@@ -1,8 +1,8 @@
 import {Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef} from '@angular/core';
 import { OnInit, OnDestroy } from '@angular/core';
 import {UsersService} from './users.service';
-import {arrayify} from 'tslint/lib/utils';
 import {PopupComponent} from './popup/popup.component';
+import {User} from '../models/user.model';
 
 @Component({
   selector: 'app-list',
@@ -10,9 +10,9 @@ import {PopupComponent} from './popup/popup.component';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit, OnDestroy {
-  private usersList = [];
+  private usersList: Array<User>;
   private pageSize = 10;
-  private activeItems = [];
+  private activeItems: Array<User>;
   private pages = [];
   private currentPage: number;
   @ViewChild('modalContainer', { read: ViewContainerRef }) container;
@@ -20,7 +20,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   constructor(private userServise: UsersService, private resolver: ComponentFactoryResolver) { }
 
-  createComponent(user: Object) {
+  createComponent(user: User) {
     this.container.clear();
     const factory: ComponentFactory<PopupComponent> = this.resolver.resolveComponentFactory(PopupComponent);
     this.componentRef = this.container.createComponent(factory);
@@ -29,8 +29,8 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userServise.getUsers()
-      .subscribe(data => {
-        this.usersList = arrayify(data);
+      .subscribe((users: Array<User>) => {
+        this.usersList = users;
         this.pages = Array(Math.ceil(this.usersList.length / this.pageSize));
         this.setPage(1);
       });

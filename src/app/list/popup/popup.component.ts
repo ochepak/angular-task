@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-popup',
@@ -6,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent implements OnInit {
-  @Input() user = {};
+  @Input() user: User;
   constructor() { }
 
   ngOnInit() {
